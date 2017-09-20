@@ -10,6 +10,7 @@ Features
 
 - Tree representation
 - Tree comparison
+
   - Action that comparison in S3
   - Invalidate paths as necessary in CloudFront and Cloudflare
 
