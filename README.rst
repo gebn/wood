@@ -30,6 +30,49 @@ Features
   - Action that comparison in S3
   - Invalidate paths as necessary in CloudFront and Cloudflare
 
+Demo
+----
+
+.. code-block:: python
+
+    import wood
+
+    # low-level comparison of two local directories
+    comparison = wood.compare('~/dir', '~/.snapshot/hourly.1/dir')
+    comparison.new()  # files added since the snapshot
+    comparison.modified()  # files modified since the snapshot
+    comparison.deleted()  # files deleted since the snapshot
+
+
+    import pathlib
+    import boto3
+
+    local_base = pathlib.Path('/path/to/web/root')
+    bucket = boto3.resource('s3').Bucket('example.com')
+
+    # create representations of the local and remote trees
+    to_deploy = wood.root(local_base)
+    deployed = wood.s3.objects_to_root(bucket.objects.all())
+
+    # compare the two as if they were local directories
+    comparison = wood.compare(to_deploy, deployed)
+
+    # write all changes (additions, modifications, deletions) to the S3 bucket
+    syncer = wood.s3.S3Syncer(local_base, bucket)
+    syncer.sync(comparison)
+
+    # invalidate the minimum amount in CloudFront to ensure the changes are visible
+    cloudfront = boto3.client('cloudfront')
+    invalidator = wood.cloudfront.CloudFrontInvalidator(cloudfront,
+                                                        '{distribution}',
+                                                        '{reference}')
+    invalidator.invalidate(comparison)  # uses prefix grouping where possible
+
+    # do the same for Cloudflare in the case of a second CDN
+    cloudflare = wood.cloudflare.CloudflareInvalidator(
+        sess, email, key, zone, 'https://example.com/')
+    cloudflare.invalidate(comparison)
+
 Why "wood"?
 -----------
 
