@@ -70,7 +70,8 @@ class CloudflareInvalidator(Invalidator):
                                                           on the 5th attempt.
             """
             response = self._session.delete(
-                f'{self._API_BASE}/client/v4/zones/{self._zone}/purge_cache',
+                '{0._API_BASE}/client/v4/zones/{0._zone}'
+                '/purge_cache'.format(self),
                 headers={
                     'X-Auth-Email': self._email,
                     'X-Auth-Key': self._key

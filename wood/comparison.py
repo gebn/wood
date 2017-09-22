@@ -186,7 +186,8 @@ class Comparison(Generic[L, R], metaclass=abc.ABCMeta):
         if isinstance(left, Directory) or isinstance(right, Directory):
             return DirectoryComparison(left, right)
 
-        raise TypeError(f'Cannot compare entities: {left}, {right}')
+        raise TypeError(
+            'Cannot compare entities: {0}, {1}'.format(left, right))
 
     def print_hierarchy(self, level: int = 0, file: IO[str] = sys.stdout) \
             -> None:
@@ -202,12 +203,13 @@ class Comparison(Generic[L, R], metaclass=abc.ABCMeta):
         print(' ' * self._INDENT_SIZE * level + str(self), file=file)
 
     def __str__(self):
-        return f'{self.__class__.__name__}(' \
-               f'{self.left or None}|{self.right or None}, ' \
-               f'is_new: {self.is_new}, ' \
-               f'is_modified: {self.is_modified}, ' \
-               f'is_deleted: {self.is_deleted}, ' \
-               f'invalidate: {self.invalidate})'
+        return '{0.__class__.__name__}(' \
+               '{1}|{2}, ' \
+               'is_new: {0.is_new}, ' \
+               'is_modified: {0.is_modified}, ' \
+               'is_deleted: {0.is_deleted}, ' \
+               'invalidate: {0.invalidate})'.format(
+                    self, self.left or None, self.right or None)
 
 
 class FileComparison(Comparison[File, File]):

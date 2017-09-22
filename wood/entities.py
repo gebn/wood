@@ -83,10 +83,10 @@ class Entity(metaclass=abc.ABCMeta):
         print(' ' * self._INDENT_SIZE * level + str(self), file=file)
 
     def __str__(self) -> str:
-        return f'{self.__class__.__name__}({self.name})'
+        return '{0.__class__.__name__}({0.name})'.format(self)
 
     def __repr__(self) -> str:
-        return f'<{self}>'
+        return '<{0}>'.format(self)
 
 
 class File(Entity):
@@ -144,8 +144,8 @@ class File(Entity):
         return File(path.name, path.stat().st_size, cls._md5(path))
 
     def __str__(self) -> str:
-        return f'{self.__class__.__name__}({self.name}, {self.size}, ' \
-               f'{self.md5})'
+        return '{0.__class__.__name__}({0.name}, {0.size}, ' \
+               '{0.md5})'.format(self)
 
 
 class Directory(Entity):
