@@ -16,7 +16,7 @@ def _read_file(name, encoding='utf-8') -> str:
 
 setup(
     name='wood',
-    version='1.0.0-rc.1',
+    version='1.0.0-rc.2',
     description='Compare directories, efficiently sync changes to AWS, and '
                 'invalidate CDNs.',
     long_description=_read_file('README.rst'),
