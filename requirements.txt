@@ -1,5 +1,9 @@
 backoff
 boto3
 botocore
+coverage
+coveralls
+mock
 more-itertools
+nose
 requests
