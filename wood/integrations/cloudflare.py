@@ -9,13 +9,13 @@ import backoff
 from wood import util
 from wood.comparison import Comparison
 from wood.entities import Entity
-from wood.invalidate import Invalidator
+from wood.invalidate import Invalidator as GenericInvalidator
 
 
 logger = logging.getLogger(__name__)
 
 
-class CloudflareInvalidator(Invalidator):
+class Invalidator(GenericInvalidator):
     """
     Invalidates URLs within a Cloudflare zone.
     """

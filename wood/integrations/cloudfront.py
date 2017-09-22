@@ -8,7 +8,7 @@ from wood.invalidate import PrefixInvalidator
 logger = logging.getLogger(__name__)
 
 
-class CloudFrontInvalidator(PrefixInvalidator):
+class Invalidator(PrefixInvalidator):
     """
     Invalidates paths in a CloudFront distribution.
     """

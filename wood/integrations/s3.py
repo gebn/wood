@@ -7,7 +7,7 @@ import mimetypes
 from wood import util
 from wood.comparison import Comparison
 from wood.entities import Root, Directory, File, Entity
-from wood.sync import Syncer
+from wood.sync import Syncer as GenericSyncer
 
 
 logger = logging.getLogger(__name__)
@@ -77,7 +77,7 @@ def objects_to_root(objects: List) -> Root:
                  for key, value in tree.items()})
 
 
-class S3Syncer(Syncer[Root, Directory]):
+class Syncer(GenericSyncer[Root, Directory]):
     """
     Synchronises a local directory with an S3 bucket.
     """

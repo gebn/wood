@@ -64,21 +64,20 @@ Demo
     comparison = wood.compare(to_deploy, deployed)
 
     # write all changes (additions, modifications, deletions) to the S3 bucket
-    syncer = wood.s3.S3Syncer(local_base, bucket)
+    syncer = wood.s3.Syncer(local_base, bucket)
     syncer.sync(comparison)
 
     # invalidate the minimum amount in CloudFront to ensure the changes are
     # visible, using prefix grouping where possible
     cloudfront = boto3.client('cloudfront')
-    invalidator = wood.cloudfront.CloudFrontInvalidator(cloudfront,
-                                                        '{distribution}',
-                                                        '{reference}')
+    invalidator = wood.cloudfront.Invalidator(cloudfront, '{distribution}',
+                                              '{reference}')
     invalidator.invalidate(comparison)
 
     # do the same for Cloudflare in the case of a second CDN
-    cloudflare = wood.cloudflare.CloudflareInvalidator(
-        sess, email, key, zone, 'https://example.com/')
-    cloudflare.invalidate(comparison)
+    invalidator = wood.cloudflare.Invalidator(sess, email, key, zone,
+                                             'https://example.com/')
+    invalidator.invalidate(comparison)
 
 Why "wood"?
 -----------
