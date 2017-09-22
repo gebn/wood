@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from pkg_resources import get_distribution, DistributionNotFound
 import os
+from pkg_resources import get_distribution, DistributionNotFound
 
+from wood.comparison import Comparison as _Comparison
+from wood.entities import Root as _Root
+
+from wood.integrations import cloudflare, cloudfront, s3
+compare = _Comparison.compare
+root = _Root.from_path
 
 __title__ = 'wood'
 __author__ = 'George Brighton'
