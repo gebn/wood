@@ -1,0 +1,13 @@
+sudo: false
+language: python
+cache: pip
+python:
+ - 3.3
+ - 3.4
+ - 3.5
+ - 3.6
+ - 3.7-dev
+script:
+ - coverage run setup.py test
+after_success:
+ - coveralls

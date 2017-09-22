@@ -1,0 +1,9 @@
+[run]
+branch = True
+source =
+    wood
+
+[report]
+exclude_lines =
+    # non-runnable code
+    if __name__ == .__main__.:

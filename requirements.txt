@@ -1,0 +1,5 @@
+backoff
+boto3
+botocore
+more-itertools
+requests
