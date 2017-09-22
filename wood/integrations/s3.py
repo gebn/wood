@@ -124,13 +124,13 @@ class S3Syncer(Syncer[Root, Directory]):
                       prefix will be appended to each remote path.
         """
         for src, key in items:
-            logger.info('Uploading %s to %s', src, key)
+            logger.info(f'Uploading {src} to {key}')
             mimetype, _ = mimetypes.guess_type(src)
             if mimetype is None:
-                logger.warning('Could not guess MIME type for %s', src)
+                logger.warning(f'Could not guess MIME type for {src}')
                 mimetype = 'application/octet-stream'
 
-            logger.debug('Deduced MIME type: %s', mimetype)
+            logger.debug(f'Deduced MIME type: {mimetype}')
             self._bucket.upload_file(src, key, ExtraArgs={
                     'ContentType': mimetype
                 })
