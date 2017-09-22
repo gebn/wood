@@ -1,6 +1,12 @@
 wood
 ====
 
+.. image:: https://img.shields.io/pypi/status/wood.svg
+   :target: https://pypi.python.org/pypi/wood
+.. image:: https://img.shields.io/pypi/v/wood.svg
+   :target: https://pypi.python.org/pypi/wood
+.. image:: https://img.shields.io/pypi/pyversions/wood.svg
+   :target: https://pypi.python.org/pypi/wood
 .. image:: https://travis-ci.org/gebn/wood.svg?branch=master
    :target: https://travis-ci.org/gebn/wood
 .. image:: https://coveralls.io/repos/github/gebn/wood/badge.svg?branch=master
