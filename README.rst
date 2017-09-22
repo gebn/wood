@@ -39,9 +39,9 @@ Demo
 
     # low-level comparison of two local directories
     comparison = wood.compare('~/dir', '~/.snapshot/hourly.1/dir')
-    comparison.new()  # files added since the snapshot
+    comparison.new()       # files added since the snapshot
     comparison.modified()  # files modified since the snapshot
-    comparison.deleted()  # files deleted since the snapshot
+    comparison.deleted()   # files deleted since the snapshot
 
 
     import pathlib
@@ -61,12 +61,13 @@ Demo
     syncer = wood.s3.S3Syncer(local_base, bucket)
     syncer.sync(comparison)
 
-    # invalidate the minimum amount in CloudFront to ensure the changes are visible
+    # invalidate the minimum amount in CloudFront to ensure the changes are
+    # visible, using prefix grouping where possible
     cloudfront = boto3.client('cloudfront')
     invalidator = wood.cloudfront.CloudFrontInvalidator(cloudfront,
                                                         '{distribution}',
                                                         '{reference}')
-    invalidator.invalidate(comparison)  # uses prefix grouping where possible
+    invalidator.invalidate(comparison)
 
     # do the same for Cloudflare in the case of a second CDN
     cloudflare = wood.cloudflare.CloudflareInvalidator(
