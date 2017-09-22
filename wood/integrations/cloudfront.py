@@ -30,7 +30,7 @@ class CloudFrontInvalidator(PrefixInvalidator):
     def _invalidate_prefixes(self, prefixes: Iterator[str]) -> None:
         prefixes = list(['/' + prefix for prefix in prefixes])
         if not prefixes:
-            # nothing to do (CloudFront will error if given an empty list)
+            # nothing to do (CloudFront will complain if given an empty list)
             return
         logger.info('Invalidating %d prefixes (%s)', len(prefixes),
                     ', '.join(prefixes))
