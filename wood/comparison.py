@@ -349,9 +349,13 @@ class DirectoryComparison(Comparison[Directory, Directory]):
             # could also just `yield name + '*'`, however this could
             # over-invalidate if multiple directories have a prefix of `name`
 
-            # hack: the root directory is an empty string; we shouldn't have to
-            # worry about this here
-            if name:
+            # we would only want to invalidate the directory itself if it has
+            # been deleted; even directory listings will be captured by the
+            # wildcard prefix
+            #
+            # the `and name` is a hack to account for root directories; ideally
+            # we shouldn't have to worry about this here
+            if self.is_deleted and name:
                 yield name
 
             yield os.path.join(name, '*')
